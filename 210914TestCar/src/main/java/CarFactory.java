@@ -1,9 +1,9 @@
 
-public class Car {
+public class CarFactory {
     private String regNr;
     private String color;
 
-    public Car(String color) {
+    public CarFactory(String color) {
         this.color = color;
 
         setRegNr(randomRegistration());
@@ -40,5 +40,13 @@ public class Car {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    String createCarModel(String name){
+        switch (name.toLowerCase()) {
+            case "volvo":
+                return new Volvo().produceModel();
+        }
+        throw new RuntimeException("No matching object could be created");
     }
 }
