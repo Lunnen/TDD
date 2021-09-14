@@ -1,10 +1,11 @@
 
 public class Car {
     private String regNr;
+    private String color;
 
-    public Car() {
+    public Car(String color) {
+        this.color = color;
 
-        //regNr = "ABC123";
         setRegNr(randomRegistration());
     }
 
@@ -33,4 +34,11 @@ public class Car {
                 ((char)(letter3)) + number1 + number2 + number3);
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 }

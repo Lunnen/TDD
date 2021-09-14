@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 public class CarTest {
 
     @Test
-    public void creation_of_new_car(){
-        Car output = new Car();
+    public void creation_of_new_car_with_color(){
+        Car output = new Car("red");
 
-        assertEquals( 6, output.getRegNr().length());
+        assertEquals( "red", output.getColor());
     }
 }
