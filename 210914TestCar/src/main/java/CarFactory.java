@@ -2,6 +2,7 @@
 public class CarFactory {
     private String regNr;
     private String color;
+    private String model;
 
     public CarFactory(String color) {
         this.color = color;
@@ -42,10 +43,26 @@ public class CarFactory {
         this.color = color;
     }
 
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
     String createCarModel(String name){
         switch (name.toLowerCase()) {
-            case "volvo":
-                return new Volvo().produceModel();
+            case "volvo" -> {
+                String output = new Volvo().produceModel();
+                setModel(output);
+                return output;
+            }
+            case "saab" -> {
+                String output2 = new Saab().produceModel();
+                setModel(output2);
+                return output2;
+            }
         }
         throw new RuntimeException("No matching object could be created");
     }
