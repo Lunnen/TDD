@@ -3,11 +3,21 @@ public class CarFactory {
     private String regNr;
     private String color;
     private String model;
+    private String carEngine;
+    private CarModel carModel;
 
     public CarFactory(String color) {
         this.color = color;
 
         setRegNr(randomRegistration());
+    }
+
+    public String getCarEngine() {
+        return carEngine;
+    }
+
+    public void setCarEngine(String carEngine) {
+        this.carEngine = carEngine;
     }
 
     public String getRegNr() {
@@ -51,19 +61,21 @@ public class CarFactory {
         this.model = model;
     }
 
-    String createCarModel(String name){
+    public CarModel getCarModel() {
+        return carModel;
+    }
+
+    CarModel createCarModel(String name){
         switch (name.toLowerCase()) {
             case "volvo" -> {
-                String output = new Volvo().produceModel();
-                setModel(output);
-                return output;
+                carModel = new Volvo();
+                return carModel;
             }
             case "saab" -> {
-                String output2 = new Saab().produceModel();
-                setModel(output2);
-                return output2;
+                carModel = new Saab();
+                return carModel;
             }
         }
         throw new RuntimeException("No matching object could be created");
     }
-}
+    }

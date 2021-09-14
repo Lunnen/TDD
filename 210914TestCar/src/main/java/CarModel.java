@@ -1,3 +1,4 @@
 public interface CarModel {
-    String produceModel();
+    String getCarName();
+    String getCarEngine();
 }
