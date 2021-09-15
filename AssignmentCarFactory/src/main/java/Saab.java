@@ -3,6 +3,7 @@ public class Saab implements Car {
     private String carModel = "Saab";
     private String carColor;
     private String registrationNumber;
+    private String carEngine = "V4 2.3T";
 
     public Saab() {
         setRegistrationNumber(randomRegistration());
@@ -32,6 +33,10 @@ public class Saab implements Car {
     @Override
     public String getCarModel() {
         return this.carModel;
+    }
+
+    public String getCarEngine() {
+        return carEngine;
     }
 
     @Override

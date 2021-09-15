@@ -47,5 +47,14 @@ public class CarFactoryTest {
 
     }
 
+    @Test
+    public void new_car_with_engine() throws IllegalArgumentException {
+        carFactory = new CarFactory();
+        Car car = carFactory.createCarModel("Volvo", "Green");
+
+        assertNotNull(car);
+        assertEquals("V4 2.5D", car.getCarEngine());
+        assertTrue((car.getCarEngine().length() > 1), "This will PASS");
+    }
 
 }
