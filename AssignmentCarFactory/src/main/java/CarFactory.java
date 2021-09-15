@@ -11,13 +11,11 @@ public class CarFactory {
     }
 
     public Car createCarModel(String model, String color) {
-        if(model.equalsIgnoreCase("volvo")){
-            return new Volvo(color);
-        }
-        if(model.equalsIgnoreCase("saab")){
-            return new Saab(color);
-        }
-        return null;
+        return switch (model.toLowerCase()) {
+            case "volvo" -> new Volvo(color);
+            case "saab" -> new Saab(color);
+            default -> null;
+        };
     }
 
 }
