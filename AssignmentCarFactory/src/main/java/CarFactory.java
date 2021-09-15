@@ -5,6 +5,7 @@ public class CarFactory {
     public CarFactory() {
         setRegistrationNumber(randomRegistration());
         color = "Black";
+
     }
     public CarFactory(String color) {
         setRegistrationNumber(randomRegistration());
@@ -19,9 +20,12 @@ public class CarFactory {
         this.color = color;
     }
 
-    public String createCarModel() {
+    public Car createCarModel() {
+        return new Volvo();
+    }
 
-        return getRegistrationNumber();
+    public Car createCarModel(String color) {
+        return new Volvo(color);
     }
 
     public String getRegistrationNumber() {
