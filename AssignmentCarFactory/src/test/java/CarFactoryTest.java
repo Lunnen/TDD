@@ -1,18 +1,25 @@
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CarFactoryTest {
 
     private CarFactory carFactory;
+    private Car carVolvo, carSaab;
+
+    @Before
+    public void init() throws IllegalArgumentException {
+        carFactory = new CarFactory();
+        carVolvo = carFactory.createCarModel("Volvo", "Red");
+        carSaab = carFactory.createCarModel("Saab", "Blue");
+    }
 
     @Test
     public void new_car_from_factory() throws IllegalArgumentException {
-        carFactory = new CarFactory();
-        Car car = carFactory.createCarModel("Volvo", "Red");
 
-        assertEquals("Red", car.getCarColor());
-        assertEquals("Volvo", car.getCarModel());
-        assertFalse((car.getCarColor().length() == 4), "This will fail");
+        assertEquals("Red", carVolvo.getCarColor());
+        assertEquals("Volvo", carVolvo.getCarModel());
+        assertFalse((carVolvo.getCarColor().length() == 4), "This will fail");
 
         Car car2 = carFactory.createCarModel("Volvo");
         assertEquals("Black", car2.getCarColor());
@@ -21,23 +28,19 @@ public class CarFactoryTest {
 
     @Test
     public void new_car_from_factory_with_another_model() throws IllegalArgumentException {
-        carFactory = new CarFactory();
-        Car car = carFactory.createCarModel("Saab", "Yellow");
 
-        assertNotNull(car);
-        assertEquals("Yellow", car.getCarColor());
-        assertEquals("Saab", car.getCarModel());
-        assertFalse((car.getCarColor().length() == 5), "This will fail");
+        assertNotNull(carSaab);
+        assertEquals("Blue", carSaab.getCarColor());
+        assertEquals("Saab", carSaab.getCarModel());
+        assertFalse((carSaab.getCarColor().length() == 5), "This will fail");
 
-        Car car3 = carFactory.createCarModel("Saab");
-        assertEquals("White", car3.getCarColor());
-        assertFalse((car3.getCarColor().length() == 4), "This will fail");
+        Car carDifferentConstructor = carFactory.createCarModel("Saab");
+        assertEquals("White", carDifferentConstructor.getCarColor());
+        assertFalse((carDifferentConstructor.getCarColor().length() == 4), "This will fail");
     }
 
     @Test
     public void test_illegal_argument_exception() {
-
-        carFactory = new CarFactory();
 
         IllegalArgumentException illegalArgumentException =
                 assertThrows(IllegalArgumentException.class,
@@ -48,13 +51,11 @@ public class CarFactoryTest {
     }
 
     @Test
-    public void new_car_with_engine() throws IllegalArgumentException {
-        carFactory = new CarFactory();
-        Car car = carFactory.createCarModel("Volvo", "Green");
+    public void new_car_with_engine() {
 
-        assertNotNull(car);
-        assertEquals("V4 2.5D", car.getCarEngine());
-        assertTrue((car.getCarEngine().length() > 1), "This will PASS");
+        assertNotNull(carVolvo);
+        assertEquals("V4 2.5D", carVolvo.getCarEngine());
+        assertTrue((carVolvo.getCarEngine().length() > 1), "This will PASS");
     }
 
 }

@@ -1,9 +1,9 @@
 public class Saab implements Car {
 
-    private String carModel = "Saab";
+    private final String carModel = "Saab";
+    private final String carEngine = "V4 2.3T";
     private String carColor;
     private String registrationNumber;
-    private String carEngine = "V4 2.3T";
 
     public Saab() {
         setRegistrationNumber(randomRegistration());
@@ -12,10 +12,6 @@ public class Saab implements Car {
     public Saab(String carColor) {
         setRegistrationNumber(randomRegistration());
         setCarColor(carColor);
-    }
-
-    public void setCarModel(String carModel) {
-        this.carModel = carModel;
     }
 
     public void setCarColor(String carColor) {

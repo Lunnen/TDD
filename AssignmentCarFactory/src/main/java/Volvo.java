@@ -1,9 +1,9 @@
 public class Volvo implements Car {
 
-    private String carModel = "Volvo";
+    private final String carModel = "Volvo";
+    private final String carEngine = "V4 2.5D";
     private String carColor;
     private String registrationNumber;
-    private String carEngine = "V4 2.5D";
 
     public Volvo() {
         setRegistrationNumber(randomRegistration());
@@ -12,14 +12,6 @@ public class Volvo implements Car {
     public Volvo(String carColor) {
         setRegistrationNumber(randomRegistration());
         setCarColor(carColor);
-    }
-
-    public void setCarModel(String carModel) {
-        this.carModel = carModel;
-    }
-
-    public String getCarEngine() {
-        return carEngine;
     }
 
     public void setCarColor(String carColor) {
@@ -32,6 +24,11 @@ public class Volvo implements Car {
 
     public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
+    }
+
+    @Override
+    public String getCarEngine() {
+        return carEngine;
     }
 
     @Override
