@@ -1,10 +1,22 @@
 public class CarFactory {
     private String registrationNumber;
-
+    private String color;
 
     public CarFactory() {
         setRegistrationNumber(randomRegistration());
+        color = "Black";
+    }
+    public CarFactory(String color) {
+        setRegistrationNumber(randomRegistration());
+        this.color = color;
+    }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public String createCarModel() {
