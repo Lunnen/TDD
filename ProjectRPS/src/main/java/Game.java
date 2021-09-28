@@ -2,11 +2,12 @@ import lombok.Value;
 
 @Value
 public class Game {
-    Player player, computer;
+    Player player;
+    Computer computer;
 
     public Game() {
         this.player = new Player("player");
-        this.computer = new Player("computer");
+        this.computer = new Computer("computer");
     }
 
 

@@ -23,4 +23,8 @@ public class Player {
     public void setMove(String move) {
         this.move = move;
     }
+
+    public String makeMove() {
+        return getMove();
+    }
 }

@@ -35,4 +35,14 @@ public class RockPaperScissorsTest {
         assertEquals("PAPER",  player.getMove());
     }
 
+    @Test
+    void test_generation_of_computer_moves_success() {
+        System.out.println(computer.makeMove());
+
+        assertNotEquals("", computer.makeMove());
+
+
+    }
+
+
 }
