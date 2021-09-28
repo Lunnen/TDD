@@ -15,4 +15,18 @@ public class RockPaperScissorsTest {
         assertEquals("player", game.getPlayer());
     }
 
+    @Test
+    void test_get_moves_success() {
+        Game game = new Game();
+
+        assertEquals("SCISSORS", game.getComputerMove());
+        assertEquals("ROCK", game.getPlayerMove());
+
+        assertNotEquals("PAPER", game.getPlayerMove());
+        assertNotEquals("SCISSORS", game.getPlayerMove());
+
+        assertNotEquals("PAPER", game.getComputerMove());
+        assertNotEquals("ROCK", game.getComputerMove());
+    }
+
 }
