@@ -17,14 +17,6 @@ public class RockPaperScissorsTest {
     }
 
     @Test
-    void test_create_new_game_success() {
-        assertNotNull(game);
-
-        assertEquals("computer", game.getComputer().getName());
-        assertEquals("player", game.getPlayer().getName());
-    }
-
-    @Test
     void test_get_moves_success() {
         assertNull(player.getMove());
         assertNull(computer.getMove());
@@ -35,14 +27,31 @@ public class RockPaperScissorsTest {
         assertEquals(Move.PAPER,  player.getMove());
     }
 
+
     @Test
-    void test_generation_of_computer_moves_success() {
-        System.out.println(computer.makeMove());
+    void test_winning_move_success() {
 
-        assertNotEquals("", computer.makeMove().toString());
+        // Checking beats-function (ENUM) => PAPER beats ROCK
+        player.setMove(Move.ROCK);
+        computer.setMove(Move.PAPER);
 
+        assertFalse(player.getMove().beats(computer.getMove()));
+        assertTrue(computer.getMove().beats(player.getMove()));
+
+        // Checking beats-function (ENUM)  => ROCK beats SCISSORS
+        player.setMove(Move.SCISSORS);
+        computer.setMove(Move.ROCK);
+
+        assertFalse(player.getMove().beats(computer.getMove()));
+        assertTrue(computer.getMove().beats(player.getMove()));
+
+        // Checking beats-function (ENUM)  => SCISSORS beats PAPER
+        player.setMove(Move.PAPER);
+        computer.setMove(Move.SCISSORS);
+
+        assertFalse(player.getMove().beats(computer.getMove()));
+        assertTrue(computer.getMove().beats(player.getMove()));
 
     }
-
 
 }
