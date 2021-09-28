@@ -26,20 +26,20 @@ public class RockPaperScissorsTest {
 
     @Test
     void test_get_moves_success() {
-        assertEquals("", player.getMove());
-        assertEquals("", computer.getMove());
+        assertNull(player.getMove());
+        assertNull(computer.getMove());
 
-        computer.setMove("SCISSORS");
-        assertEquals("SCISSORS", computer.getMove());
-        player.setMove("PAPER");
-        assertEquals("PAPER",  player.getMove());
+        computer.setMove(Move.SCISSORS);
+        assertEquals(Move.SCISSORS, computer.getMove());
+        player.setMove(Move.PAPER);
+        assertEquals(Move.PAPER,  player.getMove());
     }
 
     @Test
     void test_generation_of_computer_moves_success() {
         System.out.println(computer.makeMove());
 
-        assertNotEquals("", computer.makeMove());
+        assertNotEquals("", computer.makeMove().toString());
 
 
     }

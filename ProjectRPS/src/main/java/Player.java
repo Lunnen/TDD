@@ -1,11 +1,11 @@
 
 public class Player {
     String name;
-    String move;
+    Move move;
 
     public Player(String name) {
         this.name = name;
-        this.move = "";
+        this.move = null;
     }
 
     public String getName() {
@@ -16,15 +16,15 @@ public class Player {
         this.name = name;
     }
 
-    public String getMove() {
+    public Move getMove() {
         return move;
     }
 
-    public void setMove(String move) {
+    public void setMove(Move move) {
         this.move = move;
     }
 
-    public String makeMove() {
+    public Move makeMove() {
         return getMove();
     }
 }
