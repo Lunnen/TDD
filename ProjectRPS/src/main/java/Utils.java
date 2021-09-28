@@ -11,3 +11,5 @@ enum Move {
         };
     }
 }
+
+enum Result { WIN, LOSE, DRAW }

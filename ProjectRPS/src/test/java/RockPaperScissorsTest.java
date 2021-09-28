@@ -17,18 +17,6 @@ public class RockPaperScissorsTest {
     }
 
     @Test
-    void test_get_moves_success() {
-        assertNull(player.getMove());
-        assertNull(computer.getMove());
-
-        computer.setMove(Move.SCISSORS);
-        assertEquals(Move.SCISSORS, computer.getMove());
-        player.setMove(Move.PAPER);
-        assertEquals(Move.PAPER,  player.getMove());
-    }
-
-
-    @Test
     void test_winning_move_success() {
 
         // Checking beats-function (ENUM) => PAPER beats ROCK
@@ -54,4 +42,18 @@ public class RockPaperScissorsTest {
 
     }
 
+    @Test
+    void check_enum_result_success() {
+        assertEquals(Result.DRAW, game.getGameOutcome());
+        assertEquals(0, player.getScore());
+
+        player.addScore();
+        assertEquals(Result.WIN, game.getGameOutcome());
+        assertEquals(1, player.getScore());
+
+        computer.setScore(2);
+        assertEquals(Result.LOSE, game.getGameOutcome());
+        assertEquals(1, player.getScore());
+        assertEquals(2, computer.getScore());
+    }
 }
