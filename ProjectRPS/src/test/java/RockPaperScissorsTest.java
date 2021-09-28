@@ -4,29 +4,35 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RockPaperScissorsTest {
+    Game game;
+    Player player;
+    Player computer;
+
+    @BeforeEach
+    public void init() {
+        game = new Game();
+        player = game.getPlayer();
+        computer = game.getComputer();
+
+    }
 
     @Test
     void test_create_new_game_success() {
-        Game game = new Game();
-
         assertNotNull(game);
 
-        assertEquals("computer", game.getComputer());
-        assertEquals("player", game.getPlayer());
+        assertEquals("computer", game.getComputer().getName());
+        assertEquals("player", game.getPlayer().getName());
     }
 
     @Test
     void test_get_moves_success() {
-        Game game = new Game();
+        assertEquals("", player.getMove());
+        assertEquals("", computer.getMove());
 
-        assertEquals("SCISSORS", game.getComputerMove());
-        assertEquals("ROCK", game.getPlayerMove());
-
-        assertNotEquals("PAPER", game.getPlayerMove());
-        assertNotEquals("SCISSORS", game.getPlayerMove());
-
-        assertNotEquals("PAPER", game.getComputerMove());
-        assertNotEquals("ROCK", game.getComputerMove());
+        computer.setMove("SCISSORS");
+        assertEquals("SCISSORS", computer.getMove());
+        player.setMove("PAPER");
+        assertEquals("PAPER",  player.getMove());
     }
 
 }
