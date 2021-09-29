@@ -56,4 +56,31 @@ public class RockPaperScissorsTest {
         assertEquals(1, player.getScore());
         assertEquals(2, computer.getScore());
     }
+
+    @Test
+    void check_full_game_round_success() {
+
+        Move [] myMoves = {Move.PAPER, Move.SCISSORS, Move.ROCK};
+
+        int nrOfRounds = 3;
+        for(int i = 0; i < nrOfRounds; i++){
+            player.setMove(myMoves[i]);
+            computer.makeMove();
+
+            // Check who wins round
+            if(computer.getMove().equals(player.getMove())){
+                player.addScore();
+                computer.addScore();
+            } else {
+                if(computer.getMove().beats(player.getMove())) {
+                    computer.addScore();
+                } else {
+                    player.addScore();
+                }
+            }
+        }
+
+        // Check that result exists
+        assertNotNull(game.getGameOutcome());
+    }
 }
