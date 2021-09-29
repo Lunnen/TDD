@@ -1,9 +1,12 @@
-import lombok.Value;
 
-@Value
 public class Game {
     Player player;
     Computer computer;
+
+    public Game(Player player, Computer computer) {
+        this.player = player;
+        this.computer = computer;
+    }
 
     public Game() {
         this.player = new Player("player");
@@ -24,4 +27,19 @@ public class Game {
         }
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Computer getComputer() {
+        return computer;
+    }
+
+    public void setComputer(Computer computer) {
+        this.computer = computer;
+    }
 }
