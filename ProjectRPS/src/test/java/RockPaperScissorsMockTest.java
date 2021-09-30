@@ -2,8 +2,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class RockPaperScissorsMockTest {
@@ -13,28 +12,10 @@ public class RockPaperScissorsMockTest {
 
     @BeforeEach
     public void init() {
-        player = mock(TestPlayer.class);
+        player = mock(Player.class);
         computer = mock(Computer.class);
         game = new Game(player, computer);
 
-    }
-
-    @Test
-    void test_mock_classes_success() {
-
-        // Given
-        when(player.getMove()).thenReturn(Move.PAPER);
-        when(computer.getMove()).thenReturn(Move.ROCK);
-
-        // When
-        Move playerMove = player.getMove();
-        Move computerMove = computer.getMove();
-
-        //Then
-        assertEquals(Move.PAPER, playerMove);
-        assertEquals(Move.ROCK, computerMove);
-
-        assertTrue(playerMove.beats(computerMove));
     }
 
     @Test
@@ -66,6 +47,26 @@ public class RockPaperScissorsMockTest {
         //Then
         assertEquals(Result.LOSE, result);
     }
+
+    @Test
+    void test_mock_player_factory_exception() {
+        PlayerFactory playerFactory = mock(PlayerFactory.class);
+        // Given
+        when(playerFactory.createPlayerModel(anyString(), anyString()))
+                .thenThrow(IllegalArgumentException.class);
+    }
+
+    @Test
+    void test_get_mock_data() {
+        // Given
+        when(player.getMove()).thenReturn(MockData.getPlayerMove(0));
+        when(computer.getMove()).thenReturn(MockData.getComputerMove(0));
+        // When
+        boolean result = player.getMove().beats(computer.getMove());
+        //Then
+        assertTrue(result);
+    }
+
 
 
 
