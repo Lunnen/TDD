@@ -85,9 +85,9 @@ public class Game {
 
     public String returnMoreSameOrLess(){
 
-        boolean equalMove = (player.getScore() == computer.getScore());
-        boolean winningMove = (player.getScore() > computer.getScore());
+        boolean equalScore = (player.getScore() == computer.getScore());
+        boolean winningScore = (player.getScore() > computer.getScore());
 
-        return equalMove ? "draw" : (winningMove) ? "playerWin": "computerWin";
+        return equalScore ? "draw" : (winningScore) ? "playerWin": "computerWin";
     }
 }
