@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class RockPaperScissorsMockTest {
+public class RockPaperScissorsClassTest {
     Game game;
     Player player;
     Computer computer;
