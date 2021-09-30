@@ -14,7 +14,7 @@ public class Game {
     // Standalone game
     public Game(String name) {
         PlayerFactory playerFactory = new PlayerFactory();
-        player = playerFactory.createPlayerModel("local", "player");
+        player = playerFactory.createPlayerModel("local", name);
         computer  = new Computer();
         startGame(player);
     }
