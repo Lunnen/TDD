@@ -25,13 +25,12 @@ public class Game {
     }
 
     public Result getGameOutcome() {
-        if (player.getScore() == computer.getScore()) {
-            return Result.DRAW;
-        } else if (player.getScore() > computer.getScore()) {
-            return Result.WIN;
-        } else {
-            return Result.LOSE;
-        }
+
+        return switch (returnMoreSameOrLess()) {
+            case "draw" -> Result.DRAW;
+            case "playerWin" -> Result.WIN;
+            default -> Result.LOSE;
+        };
     }
 
     /* ---------------- For running terminal game from main -------------- */
@@ -39,14 +38,15 @@ public class Game {
         while (this.player.getScore() != 3 && computer.getScore() != 3) {
             String winner = startGameRound();
 
-            if (winner.equals("player")) {
-                this.player.addScore();
-            } else if (winner.equals("computer")) {
-                computer.addScore();
-            } else { // It is a tie
-                this.player.addScore();
-                computer.addScore();
+            switch (winner) {
+                case "player" -> this.player.addScore();
+                case "computer" -> computer.addScore();
+                default -> { // It is a tie
+                    this.player.addScore();
+                    computer.addScore();
+                }
             }
+
             System.out.println("Current Score: " + this.player.getScore() +
                     " - " + computer.getScore());
         }
@@ -63,29 +63,31 @@ public class Game {
     }
 
     public String getWinningMove(Move firstMove, Move secondMove) {
-        String winner;
-        if(firstMove == secondMove) {
-            System.out.println("It is a tie! - both win!");
-            winner = "both";
-        } else {
-            if (firstMove.beats(secondMove)) {
-                System.out.println(firstMove + " beats " + secondMove);
-                winner = "player";
-            } else {
-                System.out.println(secondMove + " beats " + firstMove);
-                winner = "computer";
-            }
-        }
-        return winner;
+
+        boolean equalMove = (firstMove == secondMove);
+        boolean winningMove = (firstMove.beats(secondMove));
+
+        System.out.println(equalMove ? "It is a tie! - both win!" :
+                (winningMove ? firstMove + " beats " + secondMove :
+                        secondMove + " beats " + firstMove));
+
+        return equalMove ? "both" : (winningMove) ? "player": "computer";
     }
 
     public void announceWinner() {
-        if (player.getScore() == computer.getScore()) {
-            System.out.println("\nIt is a " + Result.DRAW + "!");
-        } else if (player.getScore() > computer.getScore()) {
-            System.out.println("\nYou  " + Result.WIN + "!");
-        } else {
-            System.out.println("\nYou  "+ Result.LOSE + "!");
+
+        switch (returnMoreSameOrLess()) {
+            case "draw" -> System.out.println("\nIt is a " + Result.DRAW + "!");
+            case "playerWin" -> System.out.println("\nYou  " + Result.WIN + "!");
+            default -> System.out.println("\nYou  "+ Result.LOSE + "!");
         }
+    }
+
+    public String returnMoreSameOrLess(){
+
+        boolean equalMove = (player.getScore() == computer.getScore());
+        boolean winningMove = (player.getScore() > computer.getScore());
+
+        return equalMove ? "draw" : (winningMove) ? "playerWin": "computerWin";
     }
 }
