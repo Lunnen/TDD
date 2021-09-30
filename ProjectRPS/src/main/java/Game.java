@@ -1,83 +1,69 @@
+import lombok.Value;
 
+@Value // getters and setters
 public class Game {
     Player player;
     Computer computer;
 
+    // UNIT tests
+    public Game() {
+        PlayerFactory playerFactory = new PlayerFactory();
+        player = playerFactory.createPlayerModel("test", "player");
+        computer  = new Computer();
+    }
+    // Standalone game
+    public Game(String name) {
+        PlayerFactory playerFactory = new PlayerFactory();
+        player = playerFactory.createPlayerModel("local", "player");
+        computer  = new Computer();
+        startGame(player);
+    }
+    // MOCK tests
     public Game(Player player, Computer computer) {
         this.player = player;
         this.computer = computer;
     }
 
-    public Game() {
-        this.player = new Player("player");
-        this.computer = new Computer("computer");
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public Computer getComputer() {
-        return computer;
-    }
-
-    public void setComputer(Computer computer) {
-        this.computer = computer;
-    }
-
-    /*
-          For running it as standalone executable (Main)
-   */
-    public Result startGame() {
-        // Run until someone gets 3 points
-        while (player.getScore() != 3 && computer.getScore() != 3) {
-
-            String winner = startGameRound();
-
-            if (winner.equals("player")) {
-                player.addScore();
-            } else if (winner.equals("computer")) {
-                computer.addScore();
-            } else { // It is a tie
-                player.addScore();
-                computer.addScore();
-            }
-            System.out.println("Current Score: " + player.getScore() + " - " + computer.getScore());
-        }
-
-        return getResult();
-    }
-
-    public Result getResult() {
-
+    public Result getGameOutcome() {
         if (player.getScore() == computer.getScore()) {
-            System.out.println("\nIt is a tie!");
             return Result.DRAW;
         } else if (player.getScore() > computer.getScore()) {
-            System.out.println("\nYou are the winner!");
             return Result.WIN;
         } else {
-            System.out.println("\nComputer wins!");
             return Result.LOSE;
         }
     }
 
+    /* ---------------- For running terminal game from main -------------- */
+    public void startGame(Player player) {
+        while (this.player.getScore() != 3 && computer.getScore() != 3) {
+            String winner = startGameRound();
+
+            if (winner.equals("player")) {
+                this.player.addScore();
+            } else if (winner.equals("computer")) {
+                computer.addScore();
+            } else { // It is a tie
+                this.player.addScore();
+                computer.addScore();
+            }
+            System.out.println("Current Score: " + this.player.getScore() +
+                    " - " + computer.getScore());
+        }
+
+        announceWinner();
+    }
+
     public String startGameRound() {
+        Move playerMove = player.makeMove();
+        Move computerMove = computer.makeMove();
 
-        Move player = this.player.makeMove();
-        Move computer = this.computer.makeMove();
-
-        System.out.print(player + " VS " + computer + " : ");
-        return getWinningMove(player, computer);
+        System.out.print(player.getName() + " VS " + computer.getName() + " : ");
+        return getWinningMove(playerMove, computerMove);
     }
 
     public String getWinningMove(Move firstMove, Move secondMove) {
-        String winner = "";
-
+        String winner;
         if(firstMove == secondMove) {
             System.out.println("It is a tie! - both win!");
             winner = "both";
@@ -93,17 +79,13 @@ public class Game {
         return winner;
     }
 
-    public Result getGameOutcome() {
-
+    public void announceWinner() {
         if (player.getScore() == computer.getScore()) {
-            //System.out.println("\nIt is a tie!");
-            return Result.DRAW;
+            System.out.println("\nIt is a " + Result.DRAW + "!");
         } else if (player.getScore() > computer.getScore()) {
-            //System.out.println("\nYou are the winner!");
-            return Result.WIN;
+            System.out.println("\nYou  " + Result.WIN + "!");
         } else {
-            //System.out.println("\nComputer wins!");
-            return Result.LOSE;
+            System.out.println("\nYou  "+ Result.LOSE + "!");
         }
     }
 }

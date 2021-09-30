@@ -1,11 +1,11 @@
 
+public class Computer extends TestPlayer {
 
-public class Computer extends Player {
-
-    public Computer(String name) {
+    public Computer() {
         super("computer");
     }
 
+    @Override
     public Move makeMove() {
         int randomNum = ((int) (Math.random() * 3)) + 1;     // Random generate value, 1-3
         // Rock = 1, Paper = 2, Scissors = 3
@@ -15,8 +15,6 @@ public class Computer extends Player {
             case 3 -> setMove(Move.SCISSORS);
             default -> throw new IllegalStateException("Unexpected value: " + randomNum);
         }
-
         return getMove();
     }
-
 }

@@ -1,3 +1,4 @@
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ public class RockPaperScissorsMockTest {
 
     @BeforeEach
     public void init() {
-        player = mock(Player.class);
+        player = mock(TestPlayer.class);
         computer = mock(Computer.class);
         game = new Game(player, computer);
 
@@ -37,28 +38,35 @@ public class RockPaperScissorsMockTest {
     }
 
     @Test
-    void test_mock_game_outcome_success() {
+    void test_mock_game_outcome_win() {
         // Given
         when(player.getScore()).thenReturn(2);
         // When
         Result result = game.getGameOutcome();
         //Then
         assertEquals(Result.WIN, result);
+    }
 
+    @Test
+    void test_mock_game_outcome_draw() {
         // Given
         when(player.getScore()).thenReturn(0);
         // When
-        result = game.getGameOutcome();
+        Result result = game.getGameOutcome();
         //Then
         assertEquals(Result.DRAW, result);
+    }
 
+    @Test
+    void test_mock_game_outcome_lose() {
         // Given
         when(computer.getScore()).thenReturn(1);
         // When
-        result = game.getGameOutcome();
+        Result result = game.getGameOutcome();
         //Then
         assertEquals(Result.LOSE, result);
     }
+
 
 
 }

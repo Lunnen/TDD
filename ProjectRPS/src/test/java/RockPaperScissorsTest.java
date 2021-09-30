@@ -1,3 +1,4 @@
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -6,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RockPaperScissorsTest {
     Game game;
     Player player;
-    Player computer;
+    Computer computer;
 
     @BeforeEach
     public void init() {
