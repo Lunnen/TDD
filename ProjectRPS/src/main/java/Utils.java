@@ -13,3 +13,15 @@ enum Move {
 }
 
 enum Result { WIN, LOSE, DRAW }
+
+interface Utils {
+
+    static String returnDrawWinLose(int playerScore, int computerScore){
+
+        boolean equalScore = (playerScore == computerScore);
+        boolean winningScore = (playerScore > computerScore);
+
+        return equalScore ? "draw" :
+                winningScore ? "playerWin": "computerWin";
+    }
+}

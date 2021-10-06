@@ -49,7 +49,7 @@ public class RockPaperScissorsClassTest {
     }
 
     @Test
-    void test_mock_player_factory_exception() {
+    void test_mock_player_factory_exception() throws IllegalArgumentException {
         PlayerFactory playerFactory = mock(PlayerFactory.class);
         // Given
         when(playerFactory.createPlayerModel(anyString(), anyString()))
